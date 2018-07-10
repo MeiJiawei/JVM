@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 运行时常量池导致的内存溢出异常
+ * 运行时常量池导致的内存溢出异常 常量池jdk1.8已经移到堆里面
  *
- * VM Args: -XX:PermSize=10M -XX:MaxPermSize=10M
+ * OLD: -XX:PermSize=10M -XX:MaxPermSize=10M
+ * VM Args: -Xmx1m -XX:-UseGCOverheadLimit -XX:+PrintGCDetails
  *
- * java1.7以及以上不会有问题
- * 1.7以下会java.lang.OutOfMemoryError: PermGen space
+ * 1.8   java.lang.OutOfMemoryError: Java heap space
+ * 1.7   java.lang.OutOfMemoryError: PermGen space
  */
 public class RuntimeConstantPoolOOM {
     public static void main(String[] args){

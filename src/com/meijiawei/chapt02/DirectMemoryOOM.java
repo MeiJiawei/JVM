@@ -6,9 +6,9 @@ import java.lang.reflect.Field;
 
 /**
  * 本机直接内存溢出
- *
  * VM Args: -Xmx20M -XX:MaxDirectMemorySize=10M
  *
+ * 直接内存默认和java堆一样大
  * 异常：java.lang.OutOfMemoryError
  */
 public class DirectMemoryOOM {
@@ -18,7 +18,7 @@ public class DirectMemoryOOM {
         Field unsafeField = Unsafe.class.getDeclaredFields()[0];
         unsafeField.setAccessible(true);
         Unsafe unsafe = (Unsafe) unsafeField.get(null);
-        while(true){
+        while (true) {
             unsafe.allocateMemory(_1MB);
         }
     }
